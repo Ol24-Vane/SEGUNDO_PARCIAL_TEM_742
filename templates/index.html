@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Productos</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <!-- Recuadro con los datos -->
+    <div class="recuadro">
+        <h2>SEGUNDO PARCIAL TEM-742</h2>
+        <p><strong>Nombre:</strong> Vanesa Ramirez Callisaya</p>
+        <p><strong>Carnet:</strong>10074775 LP</p>
+    </div>
+
+    <h1 class="titulo">Gestión de productos</h1>
+
+
+    <a href="{{ url_for('nuevo_producto') }}" class="nuevo-producto">Nuevo producto</a>
+
+    <table>
+        <tr>
+            <th>Id</th>
+            <th>Descripción</th>
+            <th>Cantidad</th>
+            <th>Precio</th>
+            <th>Fecha Vencimiento</th>
+            <th>Categoría</th>
+            <th>Acciones</th>
+        </tr>
+        {% for producto in productos %}
+        <tr>
+            <td>{{ producto['id'] }}</td>
+            <td>{{ producto['nombre'] }}</td>
+            <td>{{ producto['cantidad'] }}</td>
+            <td>{{ producto['precio'] }}</td>
+            <td>{{ producto['fecha_vencimiento'] }}</td>
+            <td>{{ producto['categoria'] }}</td>
+            <td>
+                <a href="{{ url_for('editar_producto', id=producto['id']) }}">Editar</a> |
+                <a href="{{ url_for('eliminar_producto', id=producto['id']) }}">Eliminar</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
